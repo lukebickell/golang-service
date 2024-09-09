@@ -20,7 +20,7 @@ jobs:
 
       - name: Build Go binary for Linux
         run: |
-          GOOS=linux GOARCH=amd64 go build -o bootstrap main.go
+          CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -o bootstrap main.go
 
       - name: Zip the binary
         run: zip function.zip bootstrap
