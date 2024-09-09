@@ -1,4 +1,4 @@
-FROM golang:1.18-bullseye as base
+FROM golang:1.23-bullseye as base
 
 RUN adduser \
   --disabled-password \
