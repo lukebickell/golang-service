@@ -1,0 +1,26 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+
+
+Description:
+  golang-service
+Resources:
+  API:
+    Type: AWS::Serverless::Function
+    Properties:
+      Handler: main
+      CodeUri: ./bin/deployment.zip
+      Runtime: go1.x
+      Timeout: 10
+      Events:
+        API:
+          Type: Api
+          Properties:
+            Path: /
+            Method: any
+        API_ID:
+          Type: Api
+          Properties:
+            Path: /{id}
+            Method: any
+        
