@@ -4,6 +4,7 @@ import (
 	"context"
 	"encoding/json"
 	"net/http"
+	"strings"
 
 	"github.com/aws/aws-lambda-go/events"
 	"github.com/aws/aws-lambda-go/lambda"
@@ -21,10 +22,18 @@ var books = map[string]Book{
 	"2": {ID: "2", Title: "Clean Code", Author: "Robert C. Martin", Year: 2008},
 }
 
+func extractBookID(path string) (string, bool) {
+	parts := strings.Split(strings.Trim(path, "/"), "/")
+	if len(parts) == 2 {
+		return parts[1], true
+	}
+	return "", false
+}
+
 func handler(ctx context.Context, event events.APIGatewayProxyRequest) (events.APIGatewayProxyResponse, error) {
 	switch event.HTTPMethod {
 	case http.MethodGet:
-		if id, ok := event.PathParameters["id"]; ok {
+		if id, ok := extractBookID(event.Path); ok {
 			return getBook(id)
 		}
 		return listBooks()
