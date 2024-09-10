@@ -14,12 +14,11 @@ type Book struct {
 	ID     string `json:"id"`
 	Title  string `json:"title"`
 	Author string `json:"author"`
-	Year   int    `json:"year"`
 }
 
 var books = map[string]Book{
-	"1": {ID: "1", Title: "The Go Programming Language", Author: "Alan Donovan", Year: 2015},
-	"2": {ID: "2", Title: "Clean Code", Author: "Robert C. Martin", Year: 2008},
+	"1": {ID: "1", Title: "Song of Achilles", Author: "Madeline Miller"},
+	"2": {ID: "2", Title: "The Other Boleyn Girl", Author: "Philippa Gregory"},
 }
 
 func extractBookID(path string) (string, bool) {
